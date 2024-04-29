@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/set-detail.css' %}">
+</head>
+<section class="section-content padding-y padding-x bg">
+    <h3>{{ set.title }}</h3>
+    <section class="search-results">
+        {% for card in card_list %}
+        <div class="search-result">
+            <div class="search-result__content" tabindex="0">
+                <div class='search-result__product'>
+                    <div class='product-card'>
+                        <div class'product-card__content' tabindex='0' style="--border: 0; --boxShadow: 0px 1px 2px 0px #00000033; --transition: box-shadow 180ms ease-out;">
+                            <a href='#' class data-testid='product-card__image--0' tabindex='-1'>
+                                <section class='product-card__product' style='--backgroundColour: #FFFFFF; --padding: 16px;'>
+                                    <section class'product-card__image'>
+                                        <div class="lazy-image__wrapper">
+                                            <img src="{% static card.get_image %}" data-testid="product-image__container--{{card.card_name}}" alt="{{ card.card_name }}" class="v-lazy-image v-lazy-image-loaded">
+                                <!----></div>
+                                    </section>
+                                    <h3 class='product-card__category-name'>YuGiOh</h3>
+                                    <h4 class='product-card__subtitle'>{{card.set.title}}</h4>
+                                    <section class='product-card__rarity'>
+                                        <span>{{ card.card_rarity }}</span>
+                                        <span> · </span>
+                                        <span>{{ card.card_code }}</span>
+                                    </section>
+                                    <span class='product-card__title truncate'>{{ card.card_name }}</span>
+                                    <div class='inventory'>
+                                        <div class='inventory__container'>
+                                            <span class='inventory__listing-count inventory__listing-count-block'>
+                                                <span> {{ card.tcg_num_listings }} listings </span>
+                                                from
+                                            </span>
+                                            <span class='inventory__price'>
+                                                <span>${{ card.tcg_min_listing }} </span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <section class='product-card__market-price'>
+                                        <section>
+                                            <span>Market Price:</span>
+                                            <span class='product-card__market-price--value'>${{ card.tcg_market_price }}</span>
+                                        </section>
+                                    </section>
+                                </section>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endfor %}
+</section>
+{% endblock content %}
+
+
+
